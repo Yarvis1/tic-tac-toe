@@ -1,0 +1,15 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+float printBoard(char board[3][3]);
+int main(void){
+  char board[3][3] = {
+    {'-','-','-'},
+    {'o','-','-'},
+    {'-','-','-'}
+  };
+  printBoard(board);
+}
+float printBoard(char board[3][3]){
+  cout<<board[0][0] <<'\t'<<board[0][1];
+}

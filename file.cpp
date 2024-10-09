@@ -7,24 +7,29 @@ using namespace std;
 int checkwin(char board[3][3]);
 float printBoard(char board[3][3]);
 float place(char board[3][3],char turn);
-int main(void){
-  char turn ='x';
+int main(char turn){
   char board[3][3] = {
     {'-','-','-'},
     {'-','-','-'},
     {'-','-','-'}
   };
-  while (checkwin(board)==0){
   printBoard(board);
+  while (checkwin(board)==0){
+    cout<<turn<<endl;
+    place(board,turn);
   }
   if(checkwin(board)==1){
-    
+    cout<<"player x wins";
   }
   if (checkwin(board)==2){
-
+    cout<<"player o wins";
   }
+
 }
 float place(char board[3][3], char turn){
+  if(turn='\n'){
+    turn='x';
+  }
   int row;
   int col;
   cout<<"enter a row"<<endl;
@@ -32,14 +37,18 @@ float place(char board[3][3], char turn){
   cout<<"enter a column"<<endl;
   cin>>col;
   if(board[row-1][col-1]=='-'){
-    board[row-1][col-1]=turn;
     if (turn=='x'){
+      board[row-1][col-1]=turn;
       turn='o';
     }
-    else{
+    else if (turn=='o'){
+      cout<<"saj";
+      board[row-1][col-1]=turn;
       turn='x';
     }
   }
+  cout<<turn;
+  printBoard(board);
   return turn;
   return board[3][3];
 }
@@ -99,7 +108,7 @@ int checkwin(char board[3][3]){
 float printBoard(char board[3][3]){
   cout<<'\t'<<'1'<<'\t'<<'2'<<'\t'<<'3'<<endl;
   cout<<'1'<<'\t'<<board[0][0] <<'\t'<<board[0][1]<<'\t'<<board[0][2]<<endl;
-  cout<<'2'<<'\t'<<board[1][0] <<'\t'<<board[2][1]<<'\t'<<board[1][2]<<endl;
+  cout<<'2'<<'\t'<<board[1][0] <<'\t'<<board[1][1]<<'\t'<<board[1][2]<<endl;
   cout<<'3'<<'\t'<<board[2][0] <<'\t'<<board[2][1]<<'\t'<<board[2][2]<<endl;
 }
 

@@ -1,58 +1,53 @@
-//this game is tic tac toe
+//this program plays tic tac toe
 //creator: Zach Yarvis
 //10/4/2024
 #include <iostream>
 #include <cstring>
 using namespace std;
+
 int checkwin(char board[3][3]);
-float printBoard(char board[3][3]);
-float place(char board[3][3],char turn);
-int main(char turn){
-  char board[3][3] = {
-    {'-','-','-'},
-    {'-','-','-'},
-    {'-','-','-'}
-  };
-  printBoard(board);
-  while (checkwin(board)==0){
-    cout<<turn<<endl;
-    place(board,turn);
-  }
-  if(checkwin(board)==1){
-    cout<<"player x wins";
-  }
-  if (checkwin(board)==2){
-    cout<<"player o wins";
-  }
-
-}
-float place(char board[3][3], char turn){
-  if(turn='\n'){
-    turn='x';
-  }
-  int row;
-  int col;
-  cout<<"enter a row"<<endl;
-  cin>>row;
-  cout<<"enter a column"<<endl;
-  cin>>col;
-  if(board[row-1][col-1]=='-'){
-    if (turn=='x'){
-      board[row-1][col-1]=turn;
-      turn='o';
+void printBoard(char board[3][3]);
+void place(char board[3][3], char &turn);
+// initalize board and turn + while loop for turns
+int main() {
+    char board[3][3] = {
+        {'-','-','-'},
+        {'-','-','-'},
+        {'-','-','-'}
+    };
+    char turn = 'x';
+    printBoard(board);
+    while (checkwin(board) == 0) {
+        place(board, turn);  
     }
-    else if (turn=='o'){
-      cout<<"saj";
-      board[row-1][col-1]=turn;
-      turn='x';
+    if (checkwin(board) == 1) {
+        cout << "Player x wins!" << endl;
+    } else if (checkwin(board) == 2) {
+        cout << "Player o wins!" << endl;
     }
-  }
-  cout<<turn;
-  printBoard(board);
-  return turn;
-  return board[3][3];
+    return 0;
 }
-
+//place
+void place(char board[3][3], char &turn) {  // pass by refrence
+    int row, col;
+    cout << "Enter a row (1-3): ";
+    cin >> row;
+    cout << "Enter a column (1-3): ";
+    cin >> col;
+    
+    if (board[row-1][col-1] == '-') {
+        board[row-1][col-1] = turn;  // place turn
+        if (turn == 'x') {
+	  turn = 'o';  // switch turn
+        } else {
+            turn = 'x';  // switch turn
+        }
+    } else {
+        cout << "Invalid move! Try again." << endl;
+    }
+    printBoard(board);
+}
+//checkwins
 int checkwin(char board[3][3]){
   if(board[0][0]=='x' && board[0][1]=='x'&& board[0][2]=='x'){
     return 1;
@@ -104,8 +99,9 @@ int checkwin(char board[3][3]){
   }
   return 0;
 }
+
 //prints board
-float printBoard(char board[3][3]){
+void printBoard(char board[3][3]){
   cout<<'\t'<<'1'<<'\t'<<'2'<<'\t'<<'3'<<endl;
   cout<<'1'<<'\t'<<board[0][0] <<'\t'<<board[0][1]<<'\t'<<board[0][2]<<endl;
   cout<<'2'<<'\t'<<board[1][0] <<'\t'<<board[1][1]<<'\t'<<board[1][2]<<endl;
